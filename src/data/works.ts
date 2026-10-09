@@ -3,7 +3,6 @@
 // ficha no dibuja los campos vacíos.
 import type { CoverKind } from "@/art/covers"
 import kartsCover from "@/assets/karts-cover.webp"
-import kartsMenu from "@/assets/karts-menu.webp"
 import kartsPoster from "@/assets/karts-poster.webp"
 
 export interface WorkLink {
@@ -116,7 +115,6 @@ export const WORKS: Work[] = [
     video: "/karts.mp4",
     poster: kartsPoster,
     image: kartsCover,
-    gallery: [{ src: kartsMenu, alt: "Menú principal del juego: Jugar, Jugar en línea, 2 jugadores, Elegir personaje y Opciones, sobre la pista de dulces", caption: "Menú principal." }],
     cover: "karts",
   },
   {
