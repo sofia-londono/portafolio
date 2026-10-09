@@ -1,0 +1,53 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/archivo/wdth-italic.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Paleta: sala oscura + amarillo de 30X. El color de verdad lo ponen las obras. */
+:root {
+  --sala: #0a0a0a;
+  --cartela: #141414;
+  --tiza: #f2f2ee;
+  --humo: #9c9c95;
+  --amarillo: #ddf46b;
+
+  --background: var(--sala);
+  --foreground: var(--tiza);
+  --card: var(--cartela);
+  --card-foreground: var(--tiza);
+  --muted: #1c1c1c;
+  --muted-foreground: var(--humo);
+  --border: #2a2a2a;
+  --ring: var(--amarillo);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-amarillo: var(--amarillo);
+  --font-sans: "Archivo Variable", system-ui, sans-serif;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+.term-cursor { animation: blink 1s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) { .term-cursor { animation: none; } }
+
+@layer base {
+  * { @apply border-border; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply bg-background text-foreground font-sans antialiased; font-variation-settings: "wdth" 100; }
+  :focus-visible { outline: 2px solid var(--amarillo); outline-offset: 3px; }
+  @media (min-width: 768px) { html { scroll-snap-type: y proximity; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
