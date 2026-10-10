@@ -47,22 +47,26 @@ function Ficha({ work }: { work: Work }) {
   // Si el video no carga y hay galería, no repetir la misma imagen arriba.
   const hideMain = videoFailed && !!work.gallery?.length
   const facts: [string, string | undefined][] = [
-    ["Stack", work.technique],
-    ["Tiempo", work.dimensions],
     ["Contexto", work.collection],
-    ["Rol", work.role],
     ["Estado", work.status],
   ]
   const lines = ([
     ["Problema", work.problem],
     ["Decisión", work.decision],
     ["Resultado", work.result],
+    ["Stack", work.technique],
   ] as [string, string | undefined][]).filter(([, v]) => v)
   return (
-    <div className="flex min-h-0 flex-col gap-6 overflow-y-auto px-6 pt-14 pb-10 sm:px-8">
+    <div
+      className="flex min-h-0 flex-col gap-6 overflow-y-auto px-6 pt-14 pb-10 sm:px-8"
+      style={{ background: "radial-gradient(120% 420px at 50% 0%, rgba(221,244,107,.16), rgba(221,244,107,.05) 45%, transparent 75%)" }}
+    >
       <figure className={hideMain ? "hidden" : "shrink-0"}>
-        <div className="aspect-[29/20] w-full overflow-hidden rounded-xl ring-1 ring-white/10">
-          {work.video && !videoFailed ? <FichaVideo work={work} onFail={() => setVideoFailed(true)} /> : <Cover kind={work.cover} image={work.image} />}
+        {/* Mismo marco que las tarjetas de la rueda: amarillo → oliva → negro. */}
+        <div className="rounded-xl bg-[linear-gradient(160deg,#ddf46b_0%,#6b7a1f_45%,#000_100%)] p-[3px]">
+          <div className="aspect-[29/20] w-full overflow-hidden rounded-[9px]">
+            {work.video && !videoFailed ? <FichaVideo work={work} onFail={() => setVideoFailed(true)} /> : <Cover kind={work.cover} image={work.image} />}
+          </div>
         </div>
         {work.recreation && !work.image ? (
           <figcaption className="text-muted-foreground mt-2 text-xs">Recreación ilustrativa del producto; los datos son de ejemplo.</figcaption>
@@ -81,7 +85,6 @@ function Ficha({ work }: { work: Work }) {
       <div>
         <SheetTitle className="text-[1.6rem] leading-tight font-[600]">
           {work.title}
-          {work.year ? <span className="text-muted-foreground font-normal">, {work.year}</span> : null}
         </SheetTitle>
         <SheetDescription className="text-foreground/90 mt-3 text-[1rem] leading-relaxed">{work.summary}</SheetDescription>
         <dl className="text-muted-foreground mt-4 grid gap-1 text-[0.95rem] leading-snug">
@@ -94,16 +97,19 @@ function Ficha({ work }: { work: Work }) {
         </dl>
       </div>
       {lines.length ? (
-        <dl className="grid gap-4 border-t border-white/15 pt-5">
+        <dl className="relative grid gap-4 pt-5">
+          <span aria-hidden className="absolute top-0 left-0 h-px w-full bg-[linear-gradient(90deg,#ddf46b,rgba(221,244,107,.25)_45%,transparent)]" />
           {lines.map(([k, v]) => (
             <div key={k} className="grid gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-4">
-              <dt className="text-amarillo font-[600]">{k}</dt>
+              <dt className="text-amarillo flex items-baseline gap-2 font-[600]">
+                <span aria-hidden className="inline-block size-2 shrink-0 translate-y-[-1px] rounded-[2px] bg-[linear-gradient(135deg,#ddf46b,#2a300d)]" />
+                {k}
+              </dt>
               <dd className="leading-relaxed">{v}</dd>
             </div>
           ))}
         </dl>
       ) : null}
-      {work.links?.length ? <Links work={work} /> : null}
     </div>
   )
 }
@@ -141,20 +147,6 @@ function FichaVideo({ work, onFail }: { work: Work; onFail?: () => void }) {
   )
 }
 
-function Links({ work }: { work: Work }) {
-  return (
-    <ul className="flex flex-wrap gap-x-6 gap-y-3">
-      {work.links!.map((l) => (
-        <li key={l.href}>
-          <a className="font-[600] underline decoration-1 underline-offset-4 hover:decoration-2" href={l.href} target="_blank" rel="noopener noreferrer">
-            {l.label} ↗
-          </a>
-          {l.note ? <span className="text-muted-foreground block text-sm">{l.note}</span> : null}
-        </li>
-      ))}
-    </ul>
-  )
-}
 /* ---------------- Fuera del código + Trayectoria (datos del CV) ---------------- */
 const FUERA: { t: string; big: string; small: string }[] = [
   { t: "Idiomas", big: "Español e inglés; estudio mandarín y alemán.", small: "Español nativo · Inglés B2 · Mandarín HSK3 · Alemán A2" },
