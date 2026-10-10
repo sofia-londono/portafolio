@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { Cover } from "@/art/covers"
 import cvUrl from "@/assets/cv-sofia-londono.pdf?url"
+import { Cuadrilla } from "@/components/cuadrilla"
 import { SectionNav, type NavSection } from "@/components/section-nav"
 import { Terminal } from "@/components/terminal"
 import { GradientBackground } from "@/components/ui/dark-gradient-background"
@@ -192,6 +193,8 @@ export default function App() {
   const [opened, setOpened] = React.useState(false)
   const [open, setOpen] = React.useState<number | null>(null)
   const wide = useMedia("(min-width: 768px)")
+  const heroRef = React.useRef<HTMLDivElement>(null)
+  const wordRef = React.useRef<HTMLSpanElement>(null)
 
   // Enlace directo a un proyecto: #proyecto/<id>
   React.useEffect(() => {
@@ -229,7 +232,8 @@ export default function App() {
       <main>
         {/* 1 · Portada */}
         <GradientBackground id="inicio" className="snap-start">
-          <div className="mx-auto flex min-h-svh max-w-[1400px] flex-col px-5 sm:px-10">
+          <div ref={heroRef} className="relative mx-auto flex min-h-svh max-w-[1400px] flex-col px-5 sm:px-10">
+            <Cuadrilla word={wordRef} hero={heroRef} />
             <header className="flex h-16 items-center gap-6">
               <span className="font-[620] tracking-tight">Sofía Londoño Pérez</span>
               <nav aria-label="Principal" className="ml-auto">
@@ -243,11 +247,12 @@ export default function App() {
 
             <div className="flex flex-1 flex-col justify-center gap-7 pb-10">
               <p className="text-amarillo text-[0.95rem] font-[560] tracking-wide">Builder en 30X</p>
-              <h1 className="text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.95] font-[720] tracking-[-0.03em] [font-stretch:108%]">
-                Aprendo construyendo.
+              {/* El pb deja la franja donde trabaja la cuadrilla, entre el título y el párrafo. */}
+              <h1 className="pb-2 text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.95] font-[720] tracking-[-0.03em] [font-stretch:108%] sm:pb-7">
+                Aprendo <span ref={wordRef}>construyendo.</span>
               </h1>
-              <p className="max-w-[46ch] text-[clamp(1.05rem,1.6vw,1.3rem)] leading-relaxed text-white/80">
-                Soy Sofía, estudiante de Ciencias de la Computación e IA en Bogotá. Me gustan los problemas concretos y las soluciones que alguien termina usando.
+              <p className="max-w-[60ch] text-[clamp(1.05rem,1.6vw,1.3rem)] leading-relaxed text-white/80">
+                Estudio Ciencias de la Computación e Inteligencia Artificial con un enfoque en la ingeniería de software y el backend. Impulsada por una curiosidad constante por entender cómo funcionan los sistemas por dentro, me apasiona transformar problemas complejos en código limpio, APIs escalables y herramientas potenciadas por IA.
               </p>
               <div className="flex flex-wrap gap-3">
                 <a href="#proyectos" className="bg-amarillo inline-flex h-12 items-center px-6 font-[650] text-black hover:brightness-105">Ver proyectos ↓</a>
