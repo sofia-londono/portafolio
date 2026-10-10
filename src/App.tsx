@@ -380,13 +380,22 @@ export default function App() {
           </div>
         </section>
 
-        {/* 5 · Contacto */}
+        {/* 6 · Contacto */}
         <section id="contacto" aria-labelledby="t-contacto" className="bg-amarillo flex min-h-svh snap-start flex-col text-black">
           <div className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-center gap-10 px-5 py-16 sm:px-10">
-            <h2 id="t-contacto" className="text-[clamp(3rem,13vw,10rem)] leading-[0.88] font-[760] tracking-[-0.04em] [font-stretch:110%]">Hablemos.</h2>
+            {/* "Hablemos", escrito como una llamada a función: el cursor parpadea
+                (quieto con reduced-motion, por la regla de .term-cursor). */}
+            <div className="grid gap-3">
+              <p className="font-mono text-[0.95rem] text-black/55">// hablemos</p>
+              <h2 id="t-contacto" aria-label="Contacto: connect()" className="flex items-end text-[clamp(3rem,13vw,10rem)] leading-[0.88] font-[760] tracking-[-0.04em] [font-stretch:110%]">
+                <span>connect<span className="text-black/35">()</span></span>
+                <span aria-hidden className="term-cursor mb-[0.08em] ml-[0.06em] inline-block h-[0.12em] w-[0.5em] bg-black" />
+              </h2>
+            </div>
             <ul className="flex flex-wrap items-center gap-x-8 gap-y-4 text-[1.1rem] font-[600]">
               <li><a className="inline-flex h-12 items-center rounded-full bg-black px-6 text-white" href="mailto:sofialp5w@gmail.com?subject=Builder%2030X">sofialp5w@gmail.com</a></li>
               <li><a className="underline decoration-2 underline-offset-4" href="https://www.linkedin.com/in/sofia-londono-perez/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+              <li><a className="underline decoration-2 underline-offset-4" href="https://github.com/sofia-londono" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
               <li><a className="underline decoration-2 underline-offset-4" {...CV}>Descargar CV (PDF)</a></li>
             </ul>
           </div>
@@ -416,6 +425,7 @@ export default function App() {
             <ul className="grid gap-1.5 text-sm">
               <li><a className="hover:text-amarillo" href="mailto:sofialp5w@gmail.com">sofialp5w@gmail.com</a></li>
               <li><a className="hover:text-amarillo" href="https://www.linkedin.com/in/sofia-londono-perez/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+              <li><a className="hover:text-amarillo" href="https://github.com/sofia-londono" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
               <li><a className="hover:text-amarillo" {...CV}>CV (PDF)</a></li>
             </ul>
           </div>
