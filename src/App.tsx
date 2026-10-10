@@ -166,13 +166,16 @@ function Links({ work }: { work: Work }) {
     </ul>
   )
 }
+/* ---------------- Fuera del código + Trayectoria (datos del CV) ---------------- */
+const FUERA: { t: string; big: string; small: string }[] = [
+  { t: "Idiomas", big: "Español e inglés; estudio mandarín y alemán.", small: "Español nativo · Inglés B2 · Mandarín HSK3 · Alemán A2" },
+  { t: "Voluntariado", big: "Colombia Tech Fest", small: "Voluntaria en la atención a speakers." },
+  { t: "Robótica", big: "Competencia USA BOT", small: "Un robot autónomo que sigue líneas con visión por computador." },
+]
 
-/* ---------------- Datos del CV (para la franja de abajo) ---------------- */
 const CV_FACTS: { t: string; items: string[] }[] = [
-  { t: "Experiencia", items: ["Bancoldex · Práctica en Gestión del Talento Humano, 2026", "Colombia Tech Fest · Voluntaria, atención a speakers"] },
-  { t: "Formación", items: ["Ing. en Ciencias de la Computación e IA · U. Sergio Arboleda, 2023 — hoy", "Talento Tech · Bootcamp de IA (2026) y de Análisis de Datos (2024)"] },
-  { t: "Logros", items: ["Finalista · Hackathon TalentoTECH (DataMind)", "Competencia USA BOT · robot autónomo con visión"] },
-  { t: "Idiomas", items: ["Español nativo · Inglés B2", "Mandarín HSK3 · Alemán A2"] },
+  { t: "Experiencia", items: ["Bancóldex · Práctica en Gestión del Talento Humano"] },
+  { t: "Formación", items: ["Ing. en Ciencias de la Computación e IA · U. Sergio Arboleda", "Talento Tech · Bootcamps de IA y de Análisis de Datos"] },
 ]
 
 const SECTIONS: NavSection[] = [
@@ -180,7 +183,7 @@ const SECTIONS: NavSection[] = [
   { id: "sobre-mi", label: "Sobre mí" },
   { id: "proyectos", label: "Proyectos" },
   { id: "herramientas", label: "Herramientas" },
-  { id: "indice", label: "Índice" },
+  { id: "fuera-del-codigo", label: "Fuera del código" },
   { id: "contacto", label: "Contacto" },
 ]
 
@@ -215,11 +218,6 @@ export default function App() {
   const close = () => {
     setOpen(null)
     history.replaceState(null, "", location.pathname + location.search)
-  }
-  const goAndOpen = (i: number) => {
-    document.getElementById("proyectos")?.scrollIntoView()
-    wheel.current?.go(i)
-    openWork(i)
   }
   const current = visible[active]
 
@@ -379,32 +377,23 @@ export default function App() {
           </LazyWhenNear>
         </section>
 
-        {/* 5 · Índice (lista alternativa a la rueda) */}
-        <section id="indice" aria-labelledby="t-indice" className="flex min-h-svh snap-start flex-col justify-center border-t border-white/10">
-          <div className="mx-auto w-full max-w-[1400px] px-5 py-16 sm:px-10">
-            <h2 id="t-indice" className={`${H2} mb-8`}>Índice</h2>
-            <ol className="divide-y divide-white/10 border-y border-white/10">
-              {visible.map((w, i) => (
-                <li key={w.id}>
-                  <button
-                    type="button"
-                    onClick={() => goAndOpen(i)}
-                    className="group grid w-full grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 py-3.5 text-left md:grid-cols-[minmax(0,1.5fr)_4rem_minmax(0,1.4fr)_8rem]"
-                  >
-                    <span className="group-hover:text-amarillo text-[clamp(1.15rem,2.2vw,1.6rem)] leading-snug transition-colors">{w.title}</span>
-                    <span className="text-muted-foreground tabular-nums">{w.year ?? ""}</span>
-                    <span className="text-muted-foreground col-span-2 text-sm md:col-span-1">{w.technique ?? ""}</span>
-                    <span className="text-muted-foreground col-span-2 flex items-center gap-2 text-sm md:col-span-1 md:justify-end">
-                      {w.deployed ? <><Dot /> Desplegado</> : w.status ?? ""}
-                    </span>
-                  </button>
+        {/* 5 · Fuera del código + Trayectoria compacta */}
+        <section id="fuera-del-codigo" aria-labelledby="t-fuera" className="flex min-h-svh snap-start flex-col justify-center border-t border-white/10">
+          <div className="mx-auto w-full max-w-[1400px] px-5 py-16 sm:px-10 md:pr-16">
+            <h2 id="t-fuera" className={`${H2} mb-10`}>Fuera del código</h2>
+            <ul className="grid gap-8 border-y border-white/10 py-8 md:grid-cols-3 md:gap-10">
+              {FUERA.map((f) => (
+                <li key={f.t} className="grid content-start gap-2">
+                  <p className="text-amarillo text-sm font-[650]">{f.t}</p>
+                  <p className="text-[clamp(1.25rem,2vw,1.6rem)] leading-tight font-[650] tracking-tight">{f.big}</p>
+                  <p className="text-muted-foreground leading-relaxed">{f.small}</p>
                 </li>
               ))}
-            </ol>
+            </ul>
 
             {/* Trayectoria (datos del CV) */}
             <h3 className="text-muted-foreground mt-12 mb-5 text-[1.05rem] font-[650]">Trayectoria</h3>
-            <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {CV_FACTS.map((f) => (
                 <div key={f.t}>
                   <dt className="text-amarillo mb-1.5 text-sm font-[650]">{f.t}</dt>
@@ -442,7 +431,7 @@ export default function App() {
             <p className="text-amarillo mb-2 text-sm font-[650]">Página</p>
             <ul className="grid gap-1.5 text-sm">
               <li><a className="hover:text-amarillo" href="#proyectos">Proyectos</a></li>
-              <li><a className="hover:text-amarillo" href="#indice">Índice</a></li>
+              <li><a className="hover:text-amarillo" href="#fuera-del-codigo">Fuera del código</a></li>
               <li><a className="hover:text-amarillo" href="#contacto">Contacto</a></li>
             </ul>
           </nav>
