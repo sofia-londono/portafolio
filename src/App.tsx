@@ -227,11 +227,11 @@ export default function App() {
             <div className="flex flex-1 flex-col justify-center gap-7 pb-10">
               <p className="text-amarillo text-[0.95rem] font-[560] tracking-wide">Builder en 30X</p>
               {/* El pb deja la franja donde trabaja la cuadrilla, entre el título y el párrafo. */}
-              <h1 className="pb-2 text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.95] font-[720] tracking-[-0.03em] [font-stretch:108%] sm:pb-7">
+              <h1 className="pb-3 text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.95] font-[720] tracking-[-0.03em] [font-stretch:108%] sm:pb-9">
                 Aprendo <span ref={wordRef}>construyendo.</span>
               </h1>
               <p className="max-w-[60ch] text-[clamp(1.05rem,1.6vw,1.3rem)] leading-relaxed text-white/80">
-                Estudio Ciencias de la Computación e Inteligencia Artificial con un enfoque en la ingeniería de software y el backend. Impulsada por una curiosidad constante por entender cómo funcionan los sistemas por dentro, me apasiona transformar problemas complejos en código limpio, APIs escalables y herramientas potenciadas por IA.
+                Estudio Ciencias de la Computación e IA con enfoque en ingeniería de software y backend. Me motiva entender cómo funcionan los sistemas por dentro, compartir ideas con otros y colaborar para transformar problemas complejos en soluciones claras.
               </p>
               <div className="flex flex-wrap gap-3">
                 <a href="#proyectos" className="bg-amarillo inline-flex h-12 items-center px-6 font-[650] text-black hover:brightness-105">Ver proyectos ↓</a>
