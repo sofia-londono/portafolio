@@ -275,13 +275,13 @@ export default function App() {
             <div className="grid gap-5">
               <h2 id="t-sobre" className={H2}>Sobre mí</h2>
               <p className="max-w-[46ch] text-[1.15rem] leading-relaxed">
-                Aprendo mejor cuando tengo algo entre manos. Si no sé hacer algo, armo una versión pequeña, la pruebo y la mejoro hasta que funciona.
+                Mi metodología de trabajo se basa en la experimentación constante. Si me enfrento a algo desconocido, construyo un prototipo rápido, evalúo los resultados y lo perfecciono hasta lograr una solución funcional.
               </p>
               <p className="text-muted-foreground max-w-[48ch] text-[1.05rem] leading-relaxed">
-                Así llegué a cosas muy distintas: un agente de IA para Bancoldex, un juego de karts en Unity inspirado en Sugar Rush, un robot que sigue líneas con visión por computador y pequeñas herramientas para mi día a día.
+                Así he llegado a desarrollar proyectos muy distintos: desde un agente de IA durante mis pasantías en Bancóldex o un robot autónomo que sigue líneas con visión por computador, hasta un juego de karts en Unity inspirado en Sugar Rush y pequeñas herramientas para mi día a día.
               </p>
               <p className="text-muted-foreground max-w-[48ch] text-[1.05rem] leading-relaxed">
-                Me gusta lo que no domino todavía, también fuera del código: hablo español e inglés, y estudio mandarín y alemán. Estudio Ingeniería en Ciencias de la Computación e IA en la Universidad Sergio Arboleda.
+                Esa misma curiosidad me mueve fuera del código: hablo español e inglés, estudio chino mandarín y alemán, y me formo como ingeniera en la Universidad Sergio Arboleda.
               </p>
               <p className="text-muted-foreground text-sm">Prueba la terminal: haz clic en un comando o escríbelo.</p>
             </div>

@@ -3,43 +3,41 @@
 // usuario no pidió reducir el movimiento.
 import * as React from "react"
 
-import { WORKS } from "@/data/works"
-
 type Line = { text: string; href?: string; dim?: boolean; download?: string }
 type Entry = { cmd: string; lines: Line[] }
 
 const PROMPT = "sofia@portafolio:~$"
 
 function buildCommands(cvHref: string): Record<string, Line[]> {
-  const projects = WORKS.filter((w) => !w.hidden)
   return {
     whoami: [
-      { text: "Laura Sofía Londoño Pérez" },
+      { text: "Sofía Londoño Pérez" },
       { text: "Ingeniería en Ciencias de la Computación e Inteligencia Artificial", dim: true },
-      { text: "Universidad Sergio Arboleda · Bogotá · 2023 — hoy", dim: true },
+      { text: "Universidad Sergio Arboleda · Bogotá", dim: true },
       { text: "Aprendo construyendo: problemas concretos, soluciones que alguien usa." },
     ],
-    proyectos: projects.map((w) => ({
-      text: [w.year ?? "    ", w.title, w.role ? `— ${w.role}` : w.collection ? `— ${w.collection}` : ""].join("  ").trim(),
-    })),
-    // Solo fechas confirmadas. Las que no tienen mes quedan con el año.
-    "git log": [
-      { text: "oct 2026  Portafolio para 30X: rueda de proyectos, terminal y fichas" },
-      { text: "jul 2026  Bancoldex: agente RAG desplegado en AWS" },
-      { text: "jun 2026  Bancoldex: stack elegido componente por componente" },
-      { text: "2026      MVP Predicciones del Mundial 2026, en 4 días" },
-      { text: "2024      DataMind: finalista del Hackathon TalentoTECH" },
+    "sofia --how-i-work": [
+      { text: "> [1] Arquitectura clara antes del código." },
+      { text: "> [2] Enfoque práctico: construir para probar y validar." },
+      { text: "> [3] Curiosidad continua e iteración rápida." },
+    ],
+    "sofia --get-personal-interests": [
+      { text: "{" },
+      { text: '  languages: ["Spanish", "English", "Mandarin Chinese", "German"],' },
+      { text: '  mindset: "En constante aprendizaje de nuevas tecnologías y con una marcada pasión por entender cómo funcionan los sistemas complejos."' },
+      { text: "}" },
     ],
     contacto: [
       { text: "correo    sofialp5w@gmail.com", href: "mailto:sofialp5w@gmail.com" },
       { text: "linkedin  linkedin.com/in/sofia-londono-perez", href: "https://www.linkedin.com/in/sofia-londono-perez/" },
+      { text: "github    github.com/sofia-londono", href: "https://github.com/sofia-londono" },
       { text: "cv        cv-sofia-londono.pdf  (descargar)", href: cvHref, download: "cv-sofia-londono.pdf" },
     ],
   }
 }
 
 const HELP: Line[] = [
-  { text: "Comandos: whoami · proyectos · git log · contacto · clear", dim: true },
+  { text: "Comandos: whoami · sofia --how-i-work · sofia --get-personal-interests · contacto · clear", dim: true },
 ]
 
 function useReducedMotion() {
@@ -183,7 +181,7 @@ export function Terminal({ cvHref, className = "" }: { cvHref: string; className
             )}
           </span>
         </form>
-        <p id="term-help" className="sr-only">Escribe whoami, proyectos, git log o contacto y presiona Enter.</p>
+        <p id="term-help" className="sr-only">Escribe whoami, sofia --how-i-work, sofia --get-personal-interests o contacto y presiona Enter.</p>
       </div>
     </div>
   )
