@@ -22,6 +22,9 @@
 //   (inline SVG) instead of an image URL.
 // - Index and front title adapt to narrow stages instead of shrinking to 4px.
 // - The animation loop sleeps once the wheel has landed.
+// - In the drum, the card at the front grows (FRONT) and the drum is fitted to
+//   the stage with that size, so it never spills over the text beside it.
+// - Cards wear a thin frame that fades from the 30X yellow to black.
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -91,6 +94,7 @@ const BOW = 1.82;
 const TITLE = 0.124;
 const INDEX = 0.04;
 const CULL = 1.6;
+const FRONT = 1.22; // extra scale of the front card in the drum
 
 const WHEEL_UNITS = 300;
 const DRAG_UNITS = 420;
@@ -115,11 +119,12 @@ function place(
   drumR: number,
   bow: number,
   m: number,
+  lift = 0,
 ) {
   return (
     `translateX(${m * bowAt(drumDeg, bow)}px)` +
     ` rotateZ(${(1 - m) * ringDeg}deg) translateY(${-(1 - m) * ringR}px)` +
-    ` rotateX(${m * drumDeg}deg) translateZ(${m * drumR}px)`
+    ` rotateX(${m * drumDeg}deg) translateZ(${m * drumR + lift}px)`
   );
 }
 
@@ -199,7 +204,11 @@ export function WorksWheel({
     const pScale = depth / (depth - zN);
     const yN = (drumR * Math.sin(th) + (cardH / 2) * Math.cos(th)) * pScale;
     const xN = (cardH * BOW * (1 - Math.cos(th)) + cardW / 2) * pScale;
-    const drumFit = Math.min(1, (h * 0.49) / Math.max(yN, cardH / 2 || 1), (w * 0.47) / Math.max(xN, cardW / 2 || 1));
+    const drumFit = Math.min(
+      1,
+      (h * 0.49) / Math.max(yN, (cardH * FRONT) / 2 || 1),
+      (w * 0.47) / Math.max(xN, (cardW * FRONT) / 2 || 1),
+    );
     return {
       cardW,
       cardH,
@@ -211,6 +220,9 @@ export function WorksWheel({
       bow: cardH * BOW,
       depth: cardH * LENS,
       title: Math.max(cardH * TITLE, 18),
+      // Width of the hole in the middle of the ring, so the label never
+      // touches the cards: inner radius = ring radius minus half a card.
+      hole: Math.max(2 * (ringR - (cardH * ringScale) / 2) * ringFit * 0.86, 120),
       index: Math.max(cardH * INDEX, 12),
     };
   }, [stage, count]);
@@ -232,7 +244,11 @@ export function WorksWheel({
   React.useEffect(() => {
     if (!stage.h) return;
     let frame = 0;
-    const { ringR, ringScale, ringFit, drumFit, drumR, bow } = metrics;
+    const { ringR, ringScale, ringFit, drumFit, drumR, bow, depth } = metrics;
+    // The front card comes toward the camera instead of scaling in its own
+    // plane: perspective makes it FRONT times bigger, and it stays in front
+    // of its tilted neighbours instead of being cut by them.
+    const frontLift = depth * (1 - 1 / FRONT);
 
     const draw = () => {
       const gap = target.current - turn.current;
@@ -252,7 +268,8 @@ export function WorksWheel({
         const d = i - pos;
         const card = cardRefs.current[i];
         if (card) {
-          card.style.transform = place(d * (360 / count), d * STEP, ringR, drumR, bow, m);
+          const lift = frontLift * m * clamp(1 - Math.abs(d), 0, 1);
+          card.style.transform = place(d * (360 / count), d * STEP, ringR, drumR, bow, m, lift);
           const hidden = m > 0.5 && Math.abs(d) > CULL;
           card.style.opacity = hidden ? "0" : "1";
           card.style.visibility = hidden ? "hidden" : "visible";
@@ -465,7 +482,9 @@ export function WorksWheel({
                 marginTop: -metrics.cardH / 2,
               }}
             >
-              <span className="bg-muted relative block size-full overflow-hidden rounded-xl shadow-[0_24px_60px_-20px_rgba(0,0,0,.9)] ring-1 ring-white/10">
+              {/* Marco: el degradado asoma por el padding, la portada queda entera dentro. */}
+              <span className="relative block size-full rounded-xl bg-[linear-gradient(160deg,#ddf46b_0%,#6b7a1f_45%,#000_100%)] p-[3px] shadow-[0_24px_60px_-20px_rgba(0,0,0,.9)]">
+              <span className="bg-muted relative block size-full overflow-hidden rounded-[9px]">
                 {item.cover ?? (
                   <img
                     src={item.image}
@@ -483,6 +502,7 @@ export function WorksWheel({
                   </span>
                 ) : null}
               </span>
+              </span>
             </button>
           ))}
         </div>
@@ -493,13 +513,13 @@ export function WorksWheel({
         className="pointer-events-none absolute inset-0 grid place-content-center text-center"
       >
         <span
-          className="font-[650] tracking-tight [font-stretch:125%]"
-          style={{ fontSize: metrics.title }}
+          className="mx-auto leading-[1.05] font-[650] tracking-tight text-balance [font-stretch:125%]"
+          style={{ fontSize: metrics.title, maxWidth: metrics.hole }}
         >
           {label}
         </span>
         {sublabel ? (
-          <span className="text-muted-foreground mt-1 tabular-nums" style={{ fontSize: Math.max(metrics.title * 0.4, 12) }}>
+          <span className="text-muted-foreground mx-auto mt-1.5 text-balance tabular-nums" style={{ fontSize: Math.max(metrics.title * 0.4, 12), maxWidth: metrics.hole }}>
             {sublabel}
           </span>
         ) : null}

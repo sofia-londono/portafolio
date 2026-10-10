@@ -29,17 +29,6 @@ function LazyWhenNear({ children, minHeight, className }: { children: React.Reac
 const visible = WORKS.filter((w) => !w.hidden)
 const CV = { href: cvUrl, download: "cv-sofia-londono.pdf" }
 
-/** Punto amarillo = desplegado: funciona hoy fuera de mi computador. */
-function Dot({ className = "" }: { className?: string }) {
-  return (
-    <span
-      className={`bg-amarillo inline-block size-2.5 shrink-0 rounded-full shadow-[0_0_10px_rgba(221,244,107,.8)] ${className}`}
-      role="img"
-      aria-label="Desplegado"
-    />
-  )
-}
-
 function useMedia(query: string) {
   const [m, setM] = React.useState(() => typeof window !== "undefined" && window.matchMedia(query).matches)
   React.useEffect(() => {
@@ -300,22 +289,18 @@ export default function App() {
                 <>
                   <h2 id="t-proyectos" className={H2}>Proyectos</h2>
                   <p className="text-muted-foreground max-w-[34ch] text-[1.05rem] leading-relaxed">
-                    {visible.length} cosas que construí, de 2024 a hoy. Toca una para girar la rueda; tócala otra vez para abrir su ficha.
+                    Una selección de algunos de los proyectos, herramientas y prototipos en los que he trabajado. Interactúa con la rueda para explorar cada ficha.
                   </p>
-                  <p className="text-muted-foreground flex items-center gap-2 text-sm"><Dot /> desplegado: funciona hoy</p>
+                  <p className="text-muted-foreground text-sm">Estado: continuando…</p>
                 </>
               ) : (
                 <>
-                  <p className="text-muted-foreground text-sm tabular-nums">{active + 1} / {visible.length}{current?.year ? ` · ${current.year}` : ""}{current?.status ? ` · ${current.status}` : ""}</p>
+                  <p className="text-muted-foreground text-sm tabular-nums">{active + 1} / {visible.length}{current?.status ? ` · ${current.status}` : ""}</p>
                   <h3 className="text-[clamp(1.6rem,2.6vw,2.4rem)] leading-[1.05] font-[680] tracking-[-0.02em]">{current?.title}</h3>
                   <p className="text-foreground/85 max-w-[38ch] text-[1.05rem] leading-relaxed">{current?.summary}</p>
                   {current?.technique ? <p className="text-muted-foreground max-w-[40ch] text-sm">{current.technique}</p> : null}
-                  {current?.deployed ? <p className="flex items-center gap-2 text-sm"><Dot /> Desplegado</p> : null}
                   <div className="flex flex-wrap items-center gap-4">
                     <button type="button" onClick={() => openWork(active)} className="bg-amarillo h-11 rounded-full px-5 font-[650] text-black">Ver ficha completa</button>
-                    {current?.links?.[0] ? (
-                      <a className="font-[600] underline underline-offset-4" href={current.links[0].href} target="_blank" rel="noopener noreferrer">{current.links[0].label} ↗</a>
-                    ) : null}
                   </div>
                 </>
               )}
@@ -332,10 +317,9 @@ export default function App() {
                     id: w.id,
                     title: w.title,
                     cover: <Cover kind={w.cover} image={w.image} />,
-                    badge: w.deployed ? <Dot /> : undefined,
                   }))}
-                  label="Taller abierto"
-                  sublabel="Toca un proyecto"
+                  label="Rueda de Proyectos"
+                  sublabel="Gira la rueda y selecciona una ficha"
                   action="Ver ficha"
                   showTitle={false}
                   showIndex={false}
@@ -352,7 +336,7 @@ export default function App() {
 
               {/* Celular: descripción del proyecto al frente */}
               <div className="px-5 pt-2 md:hidden" aria-live="polite">
-                <p className="text-muted-foreground text-xs tabular-nums">{active + 1} / {visible.length}{current?.year ? ` · ${current.year}` : ""}</p>
+                <p className="text-muted-foreground text-xs tabular-nums">{active + 1} / {visible.length}</p>
                 <p className="text-[1.15rem] leading-tight font-[650]">{current?.title}</p>
                 <p className="text-foreground/80 mt-1 line-clamp-3 text-[0.95rem] leading-snug">{current?.summary}</p>
               </div>
