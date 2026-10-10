@@ -395,7 +395,6 @@ export default function App() {
             <ul className="flex flex-wrap items-center gap-x-8 gap-y-4 text-[1.1rem] font-[600]">
               <li><a className="inline-flex h-12 items-center rounded-full bg-black px-6 text-white" href="mailto:sofialp5w@gmail.com?subject=Builder%2030X">sofialp5w@gmail.com</a></li>
               <li><a className="underline decoration-2 underline-offset-4" href="https://www.linkedin.com/in/sofia-londono-perez/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
-              <li><a className="underline decoration-2 underline-offset-4" href="https://github.com/sofia-londono" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
               <li><a className="underline decoration-2 underline-offset-4" {...CV}>Descargar CV (PDF)</a></li>
             </ul>
           </div>
@@ -425,7 +424,6 @@ export default function App() {
             <ul className="grid gap-1.5 text-sm">
               <li><a className="hover:text-amarillo" href="mailto:sofialp5w@gmail.com">sofialp5w@gmail.com</a></li>
               <li><a className="hover:text-amarillo" href="https://www.linkedin.com/in/sofia-londono-perez/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
-              <li><a className="hover:text-amarillo" href="https://github.com/sofia-londono" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
               <li><a className="hover:text-amarillo" {...CV}>CV (PDF)</a></li>
             </ul>
           </div>

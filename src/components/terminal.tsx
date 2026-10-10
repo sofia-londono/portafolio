@@ -30,7 +30,6 @@ function buildCommands(cvHref: string): Record<string, Line[]> {
     contacto: [
       { text: "correo    sofialp5w@gmail.com", href: "mailto:sofialp5w@gmail.com" },
       { text: "linkedin  linkedin.com/in/sofia-londono-perez", href: "https://www.linkedin.com/in/sofia-londono-perez/" },
-      { text: "github    github.com/sofia-londono", href: "https://github.com/sofia-londono" },
       { text: "cv        cv-sofia-londono.pdf  (descargar)", href: cvHref, download: "cv-sofia-londono.pdf" },
     ],
   }
