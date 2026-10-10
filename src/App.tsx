@@ -157,6 +157,7 @@ const FUERA: { t: string; big: string; small: string }[] = [
 const CV_FACTS: { t: string; items: string[] }[] = [
   { t: "Experiencia", items: ["Bancóldex · Práctica en Gestión del Talento Humano"] },
   { t: "Formación", items: ["Ing. en Ciencias de la Computación e IA · U. Sergio Arboleda", "Talento Tech · Bootcamps de IA y de Análisis de Datos"] },
+  { t: "Hackathones", items: ["Banco Agrario", "TalentoTECH · finalista con DataMind"] },
 ]
 
 const SECTIONS: NavSection[] = [
@@ -369,7 +370,7 @@ export default function App() {
 
             {/* Trayectoria (datos del CV) */}
             <h3 className="text-muted-foreground mt-12 mb-5 text-[1.05rem] font-[650]">Trayectoria</h3>
-            <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <dl className="grid grid-cols-1 gap-6 sm:grid-cols-3">
               {CV_FACTS.map((f) => (
                 <div key={f.t}>
                   <dt className="text-amarillo mb-1.5 text-sm font-[650]">{f.t}</dt>
