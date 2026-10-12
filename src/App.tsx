@@ -155,7 +155,7 @@ const FUERA: { t: string; big: string; small: string }[] = [
 ]
 
 const CV_FACTS: { t: string; items: string[] }[] = [
-  { t: "Experiencia", items: ["Bancóldex · Práctica en Gestión del Talento Humano"] },
+  { t: "Experiencia", items: ["Bancóldex · Pasantía de verano en Gestión del Talento Humano"] },
   { t: "Formación", items: ["Ing. en Ciencias de la Computación e IA · U. Sergio Arboleda", "Talento Tech · Bootcamps de IA y de Análisis de Datos"] },
   { t: "Hackathones", items: ["Banco Agrario", "TalentoTECH · finalista con DataMind"] },
 ]
@@ -231,9 +231,10 @@ export default function App() {
               <h1 className="pb-3 text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.95] font-[720] tracking-[-0.03em] [font-stretch:108%] sm:pb-9">
                 Aprendo <span ref={wordRef}>construyendo.</span>
               </h1>
-              <p className="max-w-[60ch] text-[clamp(1.05rem,1.6vw,1.3rem)] leading-relaxed text-white/80">
-                Estudio Ciencias de la Computación e IA con enfoque en ingeniería de software y backend. Me motiva entender cómo funcionan los sistemas por dentro, compartir ideas con otros y colaborar para transformar problemas complejos en soluciones claras.
-              </p>
+              <div className="max-w-[60ch] space-y-3 text-[clamp(1.05rem,1.6vw,1.3rem)] leading-relaxed text-white/80">
+                <p>Estoy en proceso de formación en ingeniería en Ciencias de la Computación e IA con enfoque en desarrollo de software y backend.</p>
+                <p>Disfruto entender la lógica detrás de cada sistema, intercambiar ideas con otros y convertir problemas reales en soluciones prácticas que funcionen bien.</p>
+              </div>
               <div className="flex flex-wrap gap-3">
                 <a href="#proyectos" className="bg-amarillo inline-flex h-12 items-center px-6 font-[650] text-black hover:brightness-105">Ver proyectos ↓</a>
                 <a {...CV} className="inline-flex h-12 items-center border border-white/40 px-6 font-[600] hover:border-white">Descargar CV</a>
@@ -255,13 +256,13 @@ export default function App() {
             <div className="grid gap-5">
               <h2 id="t-sobre" className={H2}>Sobre mí</h2>
               <p className="max-w-[46ch] text-[1.15rem] leading-relaxed">
-                Mi metodología de trabajo se basa en la experimentación constante. Si me enfrento a algo desconocido, construyo un prototipo rápido, evalúo los resultados y lo perfecciono hasta lograr una solución funcional.
+                Mi metodología de trabajo se basa en la experimentación constante. Frente a un reto desconocido, armo un prototipo inicial, evalúo los resultados y lo voy iterando hasta lograr una solución sólida y funcional.
               </p>
               <p className="text-muted-foreground max-w-[48ch] text-[1.05rem] leading-relaxed">
-                Así he llegado a desarrollar proyectos muy distintos: desde un agente de IA durante mis pasantías en Bancóldex o un robot autónomo que sigue líneas con visión por computador, hasta un juego de karts en Unity inspirado en Sugar Rush y pequeñas herramientas para mi día a día.
+                Esta misma dinámica me ha llevado a construir proyectos muy diversos: desde el desarrollo de un agente de IA durante mis pasantías en Bancóldex, la construcción de un robot autónomo por visión de computador, hasta el desarrollo 3D de un juego de karts en Unity y otras herramientas donde resuelvo necesidades cotidianas.
               </p>
               <p className="text-muted-foreground max-w-[48ch] text-[1.05rem] leading-relaxed">
-                Esa misma curiosidad me mueve fuera del código: hablo español e inglés, estudio chino mandarín y alemán, y me formo como ingeniera en la Universidad Sergio Arboleda.
+                Esa misma curiosidad me mueve fuera de la pantalla: hablo español e inglés, estudio chino mandarín y alemán, y disfruto un montón aprender en comunidad e intercambiar ideas.
               </p>
               <p className="text-muted-foreground text-sm">Prueba la terminal: haz clic en un comando o escríbelo.</p>
             </div>

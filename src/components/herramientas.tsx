@@ -3,7 +3,7 @@
 // retrasar la primera pantalla.
 import {
   siAngular, siClaude, siCplusplus, siFastapi, siGit, siGooglegemini, siJavascript,
-  siJira, siKotlin, siPerplexity, siPython, siStreamlit, siTailwindcss, siUnity, siVercel,
+  siJira, siKotlin, siOpencv, siPerplexity, siPython, siStreamlit, siTailwindcss, siUnity, siVercel,
 } from "simple-icons"
 
 // Versiones en blanco (monocromo) de los logos que no están en simple-icons.
@@ -29,6 +29,7 @@ const STACK: Omit<MarqueeLogo, "gradient">[] = [
   { name: "Angular", icon: siAngular },
   { name: "Tailwind CSS", icon: siTailwindcss },
   { name: "Streamlit", icon: siStreamlit },
+  { name: "OpenCV", icon: siOpencv },
   { name: "AWS", src: aws },
   { name: "Vercel", icon: siVercel },
   { name: "Git", icon: siGit },
